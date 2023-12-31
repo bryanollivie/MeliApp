@@ -17,16 +17,6 @@ import javax.inject.Singleton
 @InstallIn (SingletonComponent::class)
 object NetworkModule {
 
-    /*@Provides
-   @Singleton
-  fun provideRetrofit(): ApiService {
-       return Retrofit.Builder()
-           .baseUrl(Constants.BASE_URL)
-           //.addConverterFactory(MoshiConverterFactory.create())
-           .build()
-           .create(ApiService::class.java)
-   }*/
-
     @Provides
     @Singleton
     fun provideRetrofit(): ProdApiService {

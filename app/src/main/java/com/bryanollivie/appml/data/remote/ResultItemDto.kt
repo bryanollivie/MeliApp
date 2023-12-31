@@ -1,0 +1,31 @@
+package com.bryanollivie.appml.data.remote
+
+
+data class ResultsItemDto(
+    val originalPrice: Int? = null,
+    val stopTime: String? = null,
+    val catalogListing: Boolean? = null,
+    val buyingMode: String? = null,
+    val title: String? = null,
+    val domainId: String? = null,
+    val availableQuantity: Int? = null,
+    val useThumbnailId: Boolean? = null,
+    val categoryId: String? = null,
+    val price: String? = null,
+    val officialStoreId: Int? = null,
+    val id: String? = null,
+    val acceptsMercadopago: Boolean? = null,
+    val variationFilters: List<String?>? = null,
+    val thumbnail: String? = "",
+    val inventoryId: String? = null,
+    val catalogProductId: String? = null,
+    val orderBackend: Int? = null,
+    val condition: String? = null,
+    val thumbnailId: String? = null,
+    val variationId: String? = null,
+    val siteId: String? = null,
+    val listingTypeId: String? = null,
+    val permalink: String? = null,
+    val currencyId: String? = null,
+    val officialStoreName: String? = null,
+)

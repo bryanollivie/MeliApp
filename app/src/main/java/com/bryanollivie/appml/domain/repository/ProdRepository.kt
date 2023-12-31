@@ -1,30 +1,37 @@
 package com.bryanollivie.appml.domain.repository
 
 import com.bryanollivie.appml.data.local.LocalProdRepository
+import com.bryanollivie.appml.data.local.ResponseEntity
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
-import com.bryanollivie.appml.data.remote.Response
+import com.bryanollivie.appml.data.remote.ResponseDto
+import javax.inject.Inject
 
-class ProdRepository(
-    /*private val localRepository: LocalProdRepository? = null,*/
+class ProdRepository @Inject constructor(/*
+    private val localRepository: LocalProdRepository,*/
     private val remoteRepository: RemoteProdRepository
 ) {
-    /*suspend fun getSearchProd(prod: String): prodEntity {
+    //sem cache local
+    suspend fun getSearchProd(prod:String): ResponseDto? {
+        return remoteRepository.getSearchProd(prod)
+    }
+
+    //com cache local
+    /*suspend fun getAllBySearchProductsWithCache(search: String): ResponseEntity {
+
         // Tentar obter do cache local primeiro
-        val localUser = localRepository.getUser(userId)
-        if (localUser != null) {
-            return localUser
+        val localData = localRepository?.getAllBySearchProducts(search)
+        if (localData != null) {
+            return localData
         }
 
         // Se não estiver disponível localmente, buscar da API
-        val remoteUser = remoteRepository.getUser(userId)
-        // Salvar no banco de dados local para cache
-        localRepository.saveUser(UserEntity(remoteUser.id, remoteUser.name, remoteUser.email))
+        val remoteData = remoteRepository.getAllBySearchProducts(search)
 
-        return UserEntity(remoteUser.id, remoteUser.name, remoteUser.email)
+        // Salvar no banco de dados local para cache
+        localRepository?.saveBySearchProducts(ResponseEntity(remoteData.query))
+
+        return ResponseEntity(remoteData.query)
     }*/
 
-    //sem cache local
-    suspend fun getSearchProd(prod:String): Response {
-        return remoteRepository.getSearchProd(prod)
-    }
+
 }

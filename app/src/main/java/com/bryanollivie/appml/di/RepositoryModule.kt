@@ -1,5 +1,7 @@
 package com.bryanollivie.appml.di
 
+import com.bryanollivie.appml.data.local.LocalProdRepository
+import com.bryanollivie.appml.data.local.ProductDao
 import com.bryanollivie.appml.data.remote.ProdApiService
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
 import com.bryanollivie.appml.domain.repository.ProdRepository
@@ -13,10 +15,10 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     //Local
-   /* @Provides
-    fun provideLocalProductRepository(userDao: UserDao): LocalUserRepository {
-        return LocalUserRepository(userDao)
-    }*/
+    @Provides
+    fun provideLocalProductRepository(prodDao: ProductDao): LocalProdRepository {
+        return LocalProdRepository(prodDao)
+    }
 
     //Remote
     @Provides
@@ -25,25 +27,11 @@ object RepositoryModule {
     }
 
     @Provides
-    fun provideProductRepository(/*
-        localRepo: LocalUserRepository,*/
+    fun provideProductRepository(
+        //localRepo: LocalProdRepository,
         remoteRepo: RemoteProdRepository
     ): ProdRepository {
-        return ProdRepository(/*localRepo,*/ remoteRepo)
+        //return ProdRepository(localRepo, remoteRepo)
+        return ProdRepository(remoteRepo)
     }
 }
-
-/*
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
-    // Aqui você configuraria e proveria sua base de dados, DAOs, etc.
-}
-
-
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
-    // Aqui você configuraria e proveria o Retrofit, o serviço de rede, etc.
-}
-*/

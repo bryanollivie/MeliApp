@@ -1,8 +1,28 @@
 package com.bryanollivie.appml.data.local
 
-class LocalProdRepository() {
-//class LocalProdRepository(private val prodService: ProdApiService) {
-    /*suspend fun getSearchProd(prod: String): Response {
-        return prodService.getSearchProd(prod)
+class LocalProdRepository(private val productDao: ProductDao) {
+
+    fun searchById(productId: Int): ResultsItemEntity {
+        return productDao.searchById(productId)
+    }
+
+    /* fun insertAll(vararg products: ResultsItemEntity): ResultsItemEntity {
+        return productDao.insertAll(products)
     }*/
+
+    fun searchAllProducts(): List<ResultsItemEntity> {
+        return productDao.searchAllProducts()
+    }
+
+
+
+    fun getAllBySearchProducts(search: String?): ResponseEntity {
+        return productDao.getAllBySearchProducts(search)
+    }
+
+    fun saveBySearchProducts(search: ResponseEntity?): ResponseEntity {
+        return productDao.getAllBySearchProducts(search?.query)
+    }
+
 }
+

@@ -1,22 +1,19 @@
 package com.bryanollivie.appml.ui.view
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.bryanollivie.appml.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bryanollivie.appml.databinding.FragmentProductListBinding
 import com.bryanollivie.appml.ui.viewmodel.ProductListViewModel
+import com.bryanollivie.appml.ui.viewmodel.Resource
+import com.bryanollivie.appml.ui.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ResourceBundle
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
@@ -24,12 +21,10 @@ class ProductListFragment : Fragment() {
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
 
-    //private lateinit var productListViewModel: ProductListViewModel
-    private val productListViewModel: ProductListViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    //private val _userData = MutableLiveData<Resource<UserEntity>>()
-    //val userData: LiveData<Resource<UserEntity>> = _userData
-
+    private lateinit var productListViewModel: ProductListViewModel
+    //private val productListViewModel: ProductListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,40 +37,39 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //productListViewModel = ViewModelProvider(this).get(ProductListViewModel::class.java)
-        productListViewModel.searchProductByQuery("Motorola")
+        productListViewModel = ViewModelProvider(this)[ProductListViewModel::class.java]
 
 
-        /*productListViewModel.dados.observe(viewLifecycleOwner, Observer { dados ->
-            when (dados) {
+        productListViewModel.dados.observe(viewLifecycleOwner) { search ->
+            when (search) {
+                is Resource.Success -> {
+                    // Atualizar UI com os dados do usuário
+                    binding.productRecyclerView.layoutManager = LinearLayoutManager(context)
 
-                Log.e("Listview","${dados}")
-                *//*is Resource.Success -> {
-                    // Atualize a UI com os dados
+                    binding.productRecyclerView.adapter =
+                        this.context?.let {
+                            ProductListAdapter(this,sharedViewModel,search.data?.results)
+                        }
+
+                    binding.progressBar.visibility = View.GONE
                 }
                 is Resource.Loading -> {
-                    // Mostre o indicador de carregamento
+                    // Exibir indicador de carregamento
+                    binding.progressBar.visibility = View.VISIBLE
                 }
+
                 is Resource.Error -> {
-                    // Mostre a mensagem de erro
-                }*//*
+                    // Exibir mensagem de erro
+                    binding.progressBar.visibility = View.GONE
+
+                }
             }
-        })*/
-
-
-        /*productListViewModel.userData.observe(viewLifecycleOwner) { resource ->
-
         }
 
-        viewModel.getUser(userId)*/
+        sharedViewModel.getString().observe(viewLifecycleOwner, Observer { string ->
+            productListViewModel.searchProductByQuery(string)
+        })
 
-
-
-        //navigation
-        //renomear botoes
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
     }
 
     override fun onDestroyView() {

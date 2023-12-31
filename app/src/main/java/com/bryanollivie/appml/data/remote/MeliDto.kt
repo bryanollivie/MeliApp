@@ -1,11 +1,12 @@
 package com.bryanollivie.appml.data.remote
-
+/*
 data class Response(
 
 	val results: List<ResultsItem?>? = null
-)
-
-
+	val query: String? = null,
+	val country_default_time_zone: String? = null
+)*/
+/*
 data class ResultsItem(
 	val originalPrice: Int? = null,
 	val stopTime: String? = null,
@@ -21,7 +22,7 @@ data class ResultsItem(
 	val id: String? = null,
 	val acceptsMercadopago: Boolean? = null,
 	val variationFilters: List<String?>? = null,
-	val thumbnail: String? = null,
+	val thumbnail: String? = "",
 	val inventoryId: String? = null,
 	val catalogProductId: String? = null,
 	val orderBackend: Int? = null,
@@ -33,7 +34,7 @@ data class ResultsItem(
 	val permalink: String? = null,
 	val currencyId: String? = null,
 	val officialStoreName: String? = null,
-)
+)*/
 /*
 data class ResultsItem(
 	val seller: Seller? = null,
