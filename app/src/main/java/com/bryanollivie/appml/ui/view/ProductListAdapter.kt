@@ -1,6 +1,5 @@
 package com.bryanollivie.appml.ui.view
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -20,7 +19,7 @@ import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
-class ProductListAdapter(private val fragment:Fragment,private val sharedViewModel: SharedViewModel, private val dataList: List<ResultsItemDto?>?) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
+class ProductListAdapter(private val fragment:Fragment, private val sharedViewModel: SharedViewModel?, private val dataList: List<ResultsItemDto?>?) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -46,8 +45,8 @@ class ProductListAdapter(private val fragment:Fragment,private val sharedViewMod
             holder.binding.productItemPriceArText.text =
                 "Argentina: ${currentItem?.price?.toArgentinianPesoFormat()}"
 
-            Picasso.get().load(currentItem.thumbnail).into(holder.binding.productItemImage)
-
+            //Picasso.get().load(currentItem.thumbnail).into(holder.binding.productItemImage)
+            Glide.with(holder.itemView.context).load(currentItem.thumbnail).into(holder.binding.productItemImage)
             /*if (!thumbnailUrl.isNullOrEmpty()) {
                 Picasso.get().load(thumbnailUrl).into(holder.binding.productItemImage)
                 //Picasso.get().load(thumbnailUrl).into(holder.binding.productItemImage)
@@ -57,7 +56,7 @@ class ProductListAdapter(private val fragment:Fragment,private val sharedViewMod
 
             holder.binding.productItemLayout.setOnClickListener {
 
-                sharedViewModel.setProductItemClick(currentItem)
+                sharedViewModel?.setProductItemClick(currentItem)
                 NavHostFragment.findNavController(fragment)
                     .navigate(R.id.action_FirstFragment_to_SecondFragment)
             }

@@ -8,6 +8,13 @@ import dagger.hilt.android.internal.Contexts
 
 object AppUtils {
 
+    fun hideKeyboardWithTouchView(context: Context,view: View) {
+        view.setOnTouchListener { _, _ ->
+            hideKeyboard(context, view)
+            false
+        }
+    }
+
     fun validateField(editText: EditText):Boolean {
         return if (editText.text.toString().trim().isEmpty()) {
             editText.error = "Por favor, insira algum texto!"

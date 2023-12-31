@@ -33,10 +33,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.setOnTouchListener { _, _ ->
-            AppUtils.hideKeyboard(requireContext(),binding.editTextSearch)
-            false
-        }
+        AppUtils.hideKeyboardWithTouchView(requireContext(),requireView())
 
         binding.buttonSearch.setOnClickListener {
 

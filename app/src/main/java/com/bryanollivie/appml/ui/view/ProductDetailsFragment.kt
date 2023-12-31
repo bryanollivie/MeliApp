@@ -8,17 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bryanollivie.appml.R
-import com.bryanollivie.appml.databinding.FragmentProductListBinding
 import com.bryanollivie.appml.databinding.FragmentSecondBinding
-import com.bryanollivie.appml.ui.viewmodel.ProductListViewModel
 import com.bryanollivie.appml.ui.viewmodel.SharedViewModel
 import com.bryanollivie.appml.util.EXCHANGE_RATE
 import com.bryanollivie.appml.util.convertPesosArgentinosToBrazilianReais
 import com.bryanollivie.appml.util.toArgentinianPesoFormat
-import com.squareup.picasso.Picasso
-import dagger.hilt.android.AndroidEntryPoint
 
-class SecondFragment : Fragment() {
+class ProductDetailsFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!

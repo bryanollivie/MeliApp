@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bryanollivie.appml.data.remote.ResultsItemDto
 import com.bryanollivie.appml.databinding.FragmentProductListBinding
 import com.bryanollivie.appml.ui.viewmodel.ProductListViewModel
 import com.bryanollivie.appml.ui.viewmodel.Resource
@@ -20,8 +21,9 @@ class ProductListFragment : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
-
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private var adapter = ProductListAdapter(this,null,emptyList())
+
 
     private lateinit var productListViewModel: ProductListViewModel
     //private val productListViewModel: ProductListViewModel by viewModels()
@@ -36,20 +38,22 @@ class ProductListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         productListViewModel = ViewModelProvider(this)[ProductListViewModel::class.java]
 
+        binding.productRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.productRecyclerView.adapter = adapter
 
         productListViewModel.dados.observe(viewLifecycleOwner) { search ->
             when (search) {
                 is Resource.Success -> {
                     // Atualizar UI com os dados do usuário
-                    binding.productRecyclerView.layoutManager = LinearLayoutManager(context)
+                    adapter = ProductListAdapter(this,sharedViewModel,search.data?.results)
+                    binding.productRecyclerView.adapter = adapter
+                    adapter.notifyDataSetChanged()
 
-                    binding.productRecyclerView.adapter =
-                        this.context?.let {
+                        /*this.context?.let {
                             ProductListAdapter(this,sharedViewModel,search.data?.results)
-                        }
+                        }*/
 
                     binding.progressBar.visibility = View.GONE
                 }
@@ -63,6 +67,8 @@ class ProductListFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
 
                 }
+
+                else -> {}
             }
         }
 
@@ -71,6 +77,12 @@ class ProductListFragment : Fragment() {
         })
 
     }
+
+    /*fun updateData(newItems: List<ResultsItemDto>) {
+        itemList.clear()
+        itemList.addAll(newItems)
+        notifyDataSetChanged()
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()
