@@ -6,5 +6,5 @@
     <color name="colorPrimaryDark">#040300</color>
     <color name="colorAccent">#000000</color>
     <color name="colorAccent2">#FFEE58</color>
-    <color name="colorBar">#FFEE58</color>
+    <color name="colorBar">#FDD835</color>
 </resources>
