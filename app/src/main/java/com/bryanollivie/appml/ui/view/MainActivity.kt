@@ -33,20 +33,6 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        /*binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
-
-
-        /*val service = NetworkModule.createNetworkService<MeliApi>()
-
-        lifecycleScope.launch {
-
-            val prods = service.getListProd("Motorola")
-            Log.e("pros", prods.results?.get(0)?.title.toString())
-
-        }*/
     }
 
     override fun onSupportNavigateUp(): Boolean {

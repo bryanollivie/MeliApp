@@ -33,20 +33,15 @@ class ProductListAdapter(private val fragment:Fragment, private val sharedViewMo
 
         if (currentItem != null) {
 
-            //val thumbnailUrl: String = "http://http2.mlstatic.com/D_730775-MLU69805928080_062023-I.jpg"
-
-            //holder.binding.productItemImage = "https://http2.mlstatic.com/D_793457-MLA53315035139_012023-I.jpg"
-            // Glide.with(context).load("http://http2.mlstatic.com/D_750485-MLM51559388158_092022-I.jpg").into(holder.binding.productItemImage)
-
             holder.binding.productItemTitleText.text =
-                currentItem?.title?.limitLengthWithEllipsis(35)
+                currentItem?.title?.limitLengthWithEllipsis(30)?.toUpperCase()
             holder.binding.productItemPriceBrText.text =
                 "Brazil: ${currentItem?.price?.convertPesosArgentinosToBrazilianReais(EXCHANGE_RATE)}"
             holder.binding.productItemPriceArText.text =
                 "Argentina: ${currentItem?.price?.toArgentinianPesoFormat()}"
 
-            //Picasso.get().load(currentItem.thumbnail).into(holder.binding.productItemImage)
-            Glide.with(holder.itemView.context).load(currentItem.thumbnail).into(holder.binding.productItemImage)
+            Picasso.get().load(currentItem.thumbnail).into(holder.binding.productItemImage)
+            //Glide.with(holder.itemView.context).load(currentItem.thumbnail).into(holder.binding.productItemImage)
             /*if (!thumbnailUrl.isNullOrEmpty()) {
                 Picasso.get().load(thumbnailUrl).into(holder.binding.productItemImage)
                 //Picasso.get().load(thumbnailUrl).into(holder.binding.productItemImage)
