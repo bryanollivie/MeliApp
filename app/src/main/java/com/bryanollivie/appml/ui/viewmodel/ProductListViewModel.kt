@@ -24,8 +24,9 @@ class ProductListViewModel @Inject constructor(private val prodRepository: ProdR
         viewModelScope.launch {
             try {
                 val search = prodRepository.getSearchProd(prod)
-                _dados.value = search?.let { Resource.Success(it) }!!
+                _dados.value = Resource.Success(search!!)
             } catch (e: Exception) {
+                Log.e("Error:","${e.toString()}")
                 _dados.value = Resource.Error(e.toString(), null)
             }
         }
