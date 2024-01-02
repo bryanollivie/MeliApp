@@ -36,18 +36,15 @@ class ProductListAdapter(private val fragment:Fragment, private val sharedViewMo
             holder.binding.productItemTitleText.text =
                 currentItem?.title?.limitLengthWithEllipsis(30)?.toUpperCase()
             holder.binding.productItemPriceBrText.text =
-                "Brazil: ${currentItem?.price?.convertPesosArgentinosToBrazilianReais(EXCHANGE_RATE)}"
+                fragment.context?.getString(
+                    R.string.price_brazil,
+                    currentItem?.price?.convertPesosArgentinosToBrazilianReais(EXCHANGE_RATE)
+                )
             holder.binding.productItemPriceArText.text =
-                "Argentina: ${currentItem?.price?.toArgentinianPesoFormat()}"
+                fragment.context?.getString(
+                    R.string.price_argentina,currentItem?.price?.toArgentinianPesoFormat())
 
             Picasso.get().load(currentItem.thumbnail).into(holder.binding.productItemImage)
-            //Glide.with(holder.itemView.context).load(currentItem.thumbnail).into(holder.binding.productItemImage)
-            /*if (!thumbnailUrl.isNullOrEmpty()) {
-                Picasso.get().load(thumbnailUrl).into(holder.binding.productItemImage)
-                //Picasso.get().load(thumbnailUrl).into(holder.binding.productItemImage)
-            } else {
-                 holder.binding.productItemImage.setImageResource(R.drawable.ic_launcher_background)
-            }*/
 
             holder.binding.productItemLayout.setOnClickListener {
 

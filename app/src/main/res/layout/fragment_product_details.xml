@@ -15,11 +15,10 @@
         android:padding="16dp">
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,28 +33,60 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            card_view:cardCornerRadius="10dp"
+            card_view:cardCornerRadius="6dp"
             card_view:cardElevation="6dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/product_details_image"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="170dp"
+
+                android:layout_height="170dp"
                 android:src="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/product_details_text"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/app_name"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.434"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_details_image" />
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <TextView
+                android:id="@+id/product_details_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asdfasfasfasdfasdfadfasfasfasdfasfasfasdfasdfasd"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.434"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/product_details_text_pricebr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asdfasfasfasdfasdfadfasfasfasdfasfasfasdfasdfasd"
+                android:textSize="18dp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_details_text_title" />
+
+            <TextView
+                android:id="@+id/product_details_text_pricear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asdfasfasfasdfasdfadfasfasfasdfasfasfasdfasdfasd"
+                android:textSize="18dp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_details_text_pricebr" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_second"

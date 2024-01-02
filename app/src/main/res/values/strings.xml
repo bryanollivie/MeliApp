@@ -6,5 +6,9 @@
     <string name="first_fragment_label">Produtos</string>
     <string name="second_fragment_label">Detalhes do Produto</string>
     <string name="buy">Comprar</string>
+    <string name="price_brazil">Brazil: <b>%1$s</b></string>
+    <string name="price_argentina">Argentina: AR<b>%1$s</b></string>
+    <string name="compra_finalizada_com_sucesso">Compra finalizada com SUCESSO!!!</string>
+    <string name="brazildd">Brazil: %1$s</string>
 
 </resources>

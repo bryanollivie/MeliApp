@@ -1,10 +1,12 @@
 package com.bryanollivie.appml.ui.view
 
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bryanollivie.appml.R
@@ -36,18 +38,21 @@ class ProductDetailsFragment : Fragment() {
 
         if(!product.value?.id.isNullOrEmpty()){
 
-            //binding.productDetailsImage
-            binding.productDetailsText.text =
-                "Produto: \n${product.value?.title}\n" +
-                        "Brazil: ${product.value?.price?.convertPesosArgentinosToBrazilianReais(
-                            EXCHANGE_RATE
-                        )}\n" +
-                        "Argentina: ${product.value?.price?.toArgentinianPesoFormat()}\n"
-
             Picasso.get().load(product.value?.thumbnail).into(binding.productDetailsImage)
 
+            binding.productDetailsTextTitle.text = "${product.value?.title?.toUpperCase()}"
+            binding.productDetailsTextPricebr.text = getString(
+                R.string.price_brazil, product.value?.price?.convertPesosArgentinosToBrazilianReais(
+                    EXCHANGE_RATE
+                )
+            )
+            binding.productDetailsTextPricear.text = getString(R.string.price_argentina, product.value?.price?.toArgentinianPesoFormat())
+
             binding.buttonSecond.setOnClickListener {
-                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                //findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                Toast.makeText(context,
+                    getString(R.string.compra_finalizada_com_sucesso), Toast.LENGTH_SHORT).show()
+
             }
         }
 
