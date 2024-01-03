@@ -14,10 +14,10 @@ class SharedViewModel: ViewModel() {
     private val productItemClick = MutableLiveData<ResultsItemDto>()
 
     //SelectedString
-    fun setString(string: String) {
+    fun setQuery(string: String) {
         selectedString.value = string
     }
-    fun getString(): LiveData<String> {
+    fun getQuery(): LiveData<String> {
         return selectedString
     }
 

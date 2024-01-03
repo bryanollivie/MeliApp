@@ -39,7 +39,7 @@ class SearchFragment : Fragment() {
 
             if(AppUtils.validateField(binding.editTextSearch)){
                 AppUtils.hideKeyboard(requireContext(),binding.editTextSearch)
-                sharedViewModel.setString(binding.editTextSearch.text.toString())
+                sharedViewModel.setQuery(binding.editTextSearch.text.toString())
                 findNavController().navigate(R.id.action_SearchFragment_to_FirstFragment)
             }else{
                 binding.editTextSearch.requestFocus()

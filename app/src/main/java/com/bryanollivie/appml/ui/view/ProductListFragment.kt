@@ -4,26 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bryanollivie.appml.R
+import com.bryanollivie.appml.data.remote.ResponseDto
 import com.bryanollivie.appml.data.remote.ResultsItemDto
 import com.bryanollivie.appml.databinding.FragmentProductListBinding
 import com.bryanollivie.appml.ui.viewmodel.ProductListViewModel
 import com.bryanollivie.appml.ui.viewmodel.Resource
 import com.bryanollivie.appml.ui.viewmodel.SharedViewModel
+import com.bryanollivie.appml.util.hideErrorLayout
+import com.bryanollivie.appml.util.showErrorLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductListFragment : Fragment() {
+class ProductListFragment  : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
     private lateinit var productListViewModel: ProductListViewModel
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private var adapter = ProductListAdapter(this,null,emptyList())
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,15 +49,62 @@ class ProductListFragment : Fragment() {
         binding.productRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.productRecyclerView.adapter = adapter
 
-        productListViewModel.dados.observe(viewLifecycleOwner) { search ->
+        getData()
+        updateUI()
+
+
+    }
+
+    private fun getData() {
+        sharedViewModel.getQuery().observe(viewLifecycleOwner, Observer { query ->
+
+            productListViewModel.searchProductByQuery(query)
+
+        })
+    }
+
+    private fun updateUI() {
+
+        lifecycleScope.launchWhenStarted {
+
+            productListViewModel.dados.collect { search ->
+                when (search) {
+                    is Resource.Success -> {
+
+                        // Atualizar UI com os dados do usuário
+                        hideErrorLayout()
+                        adapter = ProductListAdapter(this@ProductListFragment, sharedViewModel, search.data?.results)
+                        binding.productRecyclerView.adapter = adapter
+                        binding.progressBar.visibility = View.GONE
+                        binding.productRecyclerView.visibility = View.VISIBLE
+
+                    }
+                    is Resource.Loading -> {
+
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+
+                    is Resource.Error -> {
+
+                        binding.productRecyclerView.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                        showErrorLayout(getString(R.string.search_error)
+                        ) {
+                            findNavController().navigate(R.id.action_FirstFragment_to_SearchFragment)
+
+                        }
+
+                    }
+                }
+            }
+
+            /* productListViewModel.dados.observe(viewLifecycleOwner) { search ->
             when (search) {
                 is Resource.Success -> {
 
                     // Atualizar UI com os dados do usuário
                     adapter = ProductListAdapter(this,sharedViewModel,search.data?.results)
                     binding.productRecyclerView.adapter = adapter
-                    adapter.notifyDataSetChanged()
-
                     binding.progressBar.visibility = View.GONE
                 }
                 is Resource.Loading -> {
@@ -62,20 +118,17 @@ class ProductListFragment : Fragment() {
 
                 }
 
-                else -> {}
+                else -> {
+                    //tela de erro
+                }
             }
+        }*/
         }
-
-        sharedViewModel.getString().observe(viewLifecycleOwner, Observer { string ->
-            productListViewModel.searchProductByQuery(string)
-        })
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

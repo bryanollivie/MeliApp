@@ -31,7 +31,7 @@ object NetworkModule {
                     val originalRequest = chain.request()
                     val originalUrl = originalRequest.url
                     val newUrl = originalUrl.newBuilder()
-                        //.addQueryParameter("apiKey", BuildConfig.API_KEY)
+                        //.addQueryParameter("apiKey", API_KEY)
                         .build()
 
                     val newRequest = originalRequest.newBuilder().url(newUrl).build()
