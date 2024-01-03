@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Cores Basicas -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#3483fa</color>
-    <color name="colorPrimaryDark">#040300</color>
-    <color name="colorAccent">#000000</color>
-    <color name="colorAccent2">#FFEE58</color>
-    <color name="colorBar">#FDD835</color>
+    <color name="colorBar">#FADF43</color>
+    <color name="colorBackgroud">#EDEDED</color>
+
+    <!-- Cores para Modo Claro -->
+    <color name="colorPrimary">#3483FA</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#0055FF</color>
+
+    <!-- Cores para Modo Escuro -->
+    <color name="colorPrimaryDarkMode">#3483FA</color>
+    <color name="colorPrimaryDarkDarkMode">#121212</color>
+    <color name="colorAccentDarkMode">#0055FF</color>
+
 </resources>

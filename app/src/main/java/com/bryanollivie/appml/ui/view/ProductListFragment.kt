@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
@@ -29,7 +31,8 @@ class ProductListFragment  : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var productListViewModel: ProductListViewModel
+    //private lateinit var productListViewModel: ProductListViewModel
+    private val productListViewModel : ProductListViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private var adapter = ProductListAdapter(this,null,emptyList())
 
@@ -44,26 +47,30 @@ class ProductListFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productListViewModel = ViewModelProvider(this)[ProductListViewModel::class.java]
-
-        binding.productRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.productRecyclerView.adapter = adapter
-
-        getData()
-        updateUI()
-
+        //productListViewModel = ViewModelProvider(this)[ProductListViewModel::class.java]
+        //val queryString = sharedViewModel.getQuery().toString().isNullOrBlank()
+        //if(!sharedViewModel.getQuery().toString().isNullOrBlank()){
+            updateUI()
+            getData()
+        //}
 
     }
 
     private fun getData() {
-        sharedViewModel.getQuery().observe(viewLifecycleOwner, Observer { query ->
+        if (productListViewModel.dados.value.data == null) {
+            sharedViewModel.getQuery().observe(viewLifecycleOwner, Observer { query ->
+                productListViewModel.searchProductByQuery(query)
+            })
+        }else{
+            updateUI()
+        }
 
-            productListViewModel.searchProductByQuery(query)
-
-        })
     }
 
     private fun updateUI() {
+
+        binding.productRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.productRecyclerView.adapter = adapter
 
         lifecycleScope.launchWhenStarted {
 

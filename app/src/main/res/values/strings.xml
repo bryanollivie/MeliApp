@@ -11,6 +11,6 @@
     <string name="compra_finalizada_com_sucesso">Compra finalizada com SUCESSO!!!</string>
     <string name="brazildd">Brazil: %1$s</string>
     <string name="try_again">Tentar Novamente</string>
-    <string name="search_error">Sua Busca não trouxe resultados :(</string>
+    <string name="search_error">Sua busca não trouxe resultados...</string>
 
 </resources>
