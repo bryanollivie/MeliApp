@@ -1,18 +1,27 @@
 package com.bryanollivie.appml.domain.repository
 
-import com.bryanollivie.appml.data.local.LocalProdRepository
-import com.bryanollivie.appml.data.local.ResponseEntity
+import com.bryanollivie.appml.data.local.LocalUserRepository
+import com.bryanollivie.appml.data.local.entity.User
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
 import com.bryanollivie.appml.data.remote.ResponseDto
 import javax.inject.Inject
 
-class ProdRepository @Inject constructor(/*
-    private val localRepository: LocalProdRepository,*/
+class ProdRepository @Inject constructor(
+    //private val localRepository: LocalProdRepository,
+    private val localRepository: LocalUserRepository,
     private val remoteRepository: RemoteProdRepository
 ) {
     //sem cache local
     suspend fun getSearchProd(prod:String): ResponseDto? {
         return remoteRepository.getSearchProd(prod)
+    }
+
+    fun getLocalAllUsers(): List<User>? {
+        return localRepository.getAllUsers()
+    }
+
+    fun saveLocalUsers(users:List<User>) {
+        return localRepository.saveUsers(users)
     }
 
     //com cache local

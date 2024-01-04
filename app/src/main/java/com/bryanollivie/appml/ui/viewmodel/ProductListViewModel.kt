@@ -1,49 +1,47 @@
 package com.bryanollivie.appml.ui.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bryanollivie.appml.R
+import com.bryanollivie.appml.data.local.entity.User
 import com.bryanollivie.appml.data.remote.ResponseDto
-import com.bryanollivie.appml.data.remote.ResultsItemDto
 import com.bryanollivie.appml.domain.repository.ProdRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
-class ProductListViewModel @Inject constructor(private val prodRepository: ProdRepository,private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class ProductListViewModel @Inject constructor(private val prodRepository: ProdRepository/*,private val savedStateHandle: SavedStateHandle*/) : ViewModel() {
 
     private val _dados = MutableStateFlow<Resource<ResponseDto>>(Resource.Loading())
     val dados: StateFlow<Resource<ResponseDto>> = _dados.asStateFlow()
 
-    init {
-        // Verificar se já existe uma consulta salva
-       /* val filteredData: StateFlow<Resource<ResponseDto>> =savedStateHandle.getStateFlow<Resource<ResponseDto>>("query").flatMapLatest { query ->
-            prodRepository.getSearchProd(query)
-        }*/
-
-
-        //tentar amanha
-        //val savedQuery = savedStateHandle.get<String>("query") ?: defaultQuery
-        //searchProductByQuery(savedQuery)
-    }
-
     fun searchProductByQuery(query: String) {
+
         _dados.value = Resource.Loading(null)
-        //FUNCIONA
+
         viewModelScope.launch {
             try {
 
                 val search = prodRepository.getSearchProd(query)
+
+                /*withContext(Dispatchers.IO) {
+
+                    saveLocalData()
+                }
+
+                //operação com banco de dados
+                val dados = withContext(Dispatchers.IO) {
+
+                     prodRepository.getLocalAllUsers()
+                }
+
+                Log.e("Users: ","${dados}")
+                */
 
                 if(search?.results?.size!! > 0) {
                     _dados.value = Resource.Success(search!!)
@@ -57,74 +55,18 @@ class ProductListViewModel @Inject constructor(private val prodRepository: ProdR
             }
         }
 
-        /*viewModelScope.launch {
-            try {
-                val savedQuery: String? = savedStateHandle.get("query")
-                val savedResponse: ResponseDto? = savedStateHandle.get("query_response")
-                Log.e("___savedQuery: ","${savedQuery}")
-                //Log.e("___savedResponse: ","${savedResponse}")
-
-                //val search = prodRepository.getSearchProd(query)
-
-
-
-                if (savedQuery != null) {
-
-                    if(savedResponse?.results?.size!! > 0) {
-                        _dados.value = Resource.Success(savedResponse!!)
-                    }else{
-                        _dados.value = Resource.Error("Erro ao obter dados!", null)
-                    }
-
-                } else {
-
-                    val newResponse = prodRepository.getSearchProd(query)
-                    savedStateHandle.set("query", query)
-                    savedStateHandle.set("query_response", newResponse)
-                    Log.e("___SETQUERY: ","${query}")
-                    //Log.e("___SETRESPONSE: ","${newResponse}")
-
-                    if(newResponse?.results?.size!! > 0) {
-                        _dados.value = Resource.Success(newResponse!!)
-                    }else{
-                        _dados.value = Resource.Error("Erro ao obter dados!", null)
-                    }
-                }
-
-
-            } catch (e: Exception) {
-                Log.e("Error:","${e.toString()}")
-                _dados.value = Resource.Error(e.toString(), null)
-            }
-        }*/
-
-
     }
 
-    suspend fun searchQueryProdList(query: String): LiveData<ResponseDto> {
-        val savedQuery: String? = savedStateHandle.get("query")
-        val savedResponse: ResponseDto? = savedStateHandle.get("query_response")
+    private fun saveLocalData(){
 
-        Log.e("___savedQuery: ","${savedQuery}")
-        Log.e("___savedResponse: ","${savedResponse}")
+        val user = User(userId = Random.nextInt(), firstName = "Bryanasdfadsfs", lastName = "Souza")
+        val usersList = listOf(user)
 
-        if (savedQuery != null) {
-            return    MutableLiveData(savedResponse)
-        } else {
+        prodRepository.saveLocalUsers(usersList)
 
-            val newResponse = prodRepository.getSearchProd(query)
-                savedStateHandle.set("query", query)
-                savedStateHandle.set("query_response", newResponse)
-            Log.e("___SETQUERY: ","${query}")
-            Log.e("___SETRESPONSE: ","${newResponse}")
-
-            return MutableLiveData(newResponse)
-        }
     }
-
 
 }
-
 
 
 sealed class Resource<T>(

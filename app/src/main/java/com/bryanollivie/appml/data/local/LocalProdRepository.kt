@@ -1,5 +1,8 @@
 package com.bryanollivie.appml.data.local
 
+import com.bryanollivie.appml.data.local.entity.ResponseEntity
+import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
+
 class LocalProdRepository(private val productDao: ProductDao) {
 
     fun searchById(productId: Int): ResultsItemEntity {

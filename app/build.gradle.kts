@@ -1,8 +1,10 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
+    //id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+
 }
 
 android {
@@ -45,7 +47,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.room:room-common:2.6.1")
+
     val retrofitVersion = "2.9.0"
     val okHttpVersion = "4.9.1"
     val room_version = "2.6.1"
@@ -63,15 +65,15 @@ dependencies {
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-compiler:2.50")
+    ksp("com.google.dagger:hilt-compiler:2.50")
 
     // Para testes de instrumentação
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.50")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:2.50")
+    kspAndroidTest("com.google.dagger:hilt-compiler:2.50")
 
     // Para testes unitários locais
     testImplementation("com.google.dagger:hilt-android-testing:2.50")
-    kaptTest("com.google.dagger:hilt-compiler:2.50")
+    kspTest("com.google.dagger:hilt-compiler:2.50")
 
     //Network
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -93,9 +95,12 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-livedata:2.4.0")
 
     //Room
+    implementation("androidx.room:room-common:$room_version")
     implementation ("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
     //kapt("androidx.room:room-compiler:$room_version")
+
     // opcional - Kotlin Extensions and Coroutines support for Room
     implementation ("androidx.room:room-ktx:$room_version")
     // opcional - Test Helpers
@@ -103,7 +108,10 @@ dependencies {
 
 
 }
+/*
 
 kapt {
     correctErrorTypes = true
+    useBuildCache = true
 }
+*/

@@ -40,7 +40,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextSearch"
                 android:layout_width="match_parent"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
+                android:maxLength="30"
                 android:drawableRight="@android:drawable/ic_menu_search" />
 
         </com.google.android.material.textfield.TextInputLayout>

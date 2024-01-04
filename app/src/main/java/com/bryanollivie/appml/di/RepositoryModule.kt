@@ -1,6 +1,7 @@
 package com.bryanollivie.appml.di
 
 import com.bryanollivie.appml.data.local.LocalProdRepository
+import com.bryanollivie.appml.data.local.LocalUserRepository
 import com.bryanollivie.appml.data.local.ProductDao
 import com.bryanollivie.appml.data.remote.ProdApiService
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
@@ -28,10 +29,10 @@ object RepositoryModule {
 
     @Provides
     fun provideProductRepository(
-        //localRepo: LocalProdRepository,
+        localRepo: LocalUserRepository,
         remoteRepo: RemoteProdRepository
     ): ProdRepository {
-        //return ProdRepository(localRepo, remoteRepo)
-        return ProdRepository(remoteRepo)
+        return ProdRepository(localRepo, remoteRepo)
+        //return ProdRepository(remoteRepo)
     }
 }

@@ -1,4 +1,4 @@
-package com.bryanollivie.appml.data.local
+package com.bryanollivie.appml.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

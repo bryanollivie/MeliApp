@@ -1,9 +1,9 @@
-package com.bryanollivie.appml.data.local
+package com.bryanollivie.appml.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "products")
 data class ResultsItemEntity(
     @PrimaryKey val id: String? = null,
     val originalPrice: Int? = null,
