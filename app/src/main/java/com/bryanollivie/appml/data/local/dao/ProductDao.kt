@@ -26,7 +26,7 @@ interface ProductDao {
     @Query("SELECT * FROM products WHERE title LIKE :title LIMIT 1")
     fun getByTitle(title: String): ResultsItemEntity
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(products: List<ResultsItemEntity>)
 
     @Delete

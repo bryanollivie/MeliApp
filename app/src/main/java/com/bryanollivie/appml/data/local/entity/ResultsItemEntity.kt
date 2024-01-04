@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "products")
 data class ResultsItemEntity(
-    @PrimaryKey @NonNull @ColumnInfo(name = "product_id") val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) @NonNull @ColumnInfo(name = "product_id") val id: Int = 0,
     @ColumnInfo(name = "original_price") val originalPrice: Int? = 0,
     @ColumnInfo(name = "title") val title: String? = "",
     //@ColumnInfo(name = "use_thumbnail_id") val useThumbnailId: Boolean? = false,
