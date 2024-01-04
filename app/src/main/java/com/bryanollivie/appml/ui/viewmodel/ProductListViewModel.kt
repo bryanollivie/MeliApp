@@ -29,27 +29,13 @@ class ProductListViewModel @Inject constructor(private val appRepository: AppRep
         _dados.value = Resource.Loading(null)
 
         viewModelScope.launch {
+
             try {
 
-                val search = appRepository.getSearchProd(query)
-
-                withContext(Dispatchers.IO) {
-
-                    saveLocalData(Converters.productDtoListToEntityList(search?.results))
+                //val search = appRepository.getSearchProd(query)
+                val search = withContext(Dispatchers.IO) {
+                    appRepository.getAllProductsBySearchWithCache(query)
                 }
-                /*withContext(Dispatchers.IO) {
-
-                    saveLocalData()
-                }
-
-                //operação com banco de dados
-                val dados = withContext(Dispatchers.IO) {
-
-                     prodRepository.getLocalAllUsers()
-                }
-
-                Log.e("Users: ","${dados}")
-                */
 
                 if(search?.results?.size!! > 0) {
                     _dados.value = Resource.Success(search!!)

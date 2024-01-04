@@ -5,6 +5,7 @@ import com.bryanollivie.appml.data.local.LocalRepository
 import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
 import com.bryanollivie.appml.data.remote.ResponseDto
+import com.bryanollivie.appml.data.remote.ResultsItemDto
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
@@ -12,12 +13,28 @@ class AppRepository @Inject constructor(
     private val remoteRepository: RemoteProdRepository
 ) {
     //sem cache local
-    suspend fun getSearchProd(prod:String): ResponseDto? {
-        val resultSearch = remoteRepository.getSearchProd(prod)
-
-        //saveAllProducts(Converters.productDtoListToEntityList(resultSearch.results))
-
+    suspend fun getRemoteAllProductsBySearch(search: String): ResponseDto? {
+        val resultSearch = remoteRepository.getSearchProd(search)
         return resultSearch
+    }
+
+    //com cache local
+    suspend fun getAllProductsBySearchWithCache(search: String): ResponseDto {
+
+        // Tentar obter do cache local primeiro
+        var localData = localRepository?.getSearchByQuery(search)
+        if (localData != null) {
+            return Converters.responseEntityToDto(localData)
+        }
+
+        // Se não estiver disponível localmente, buscar da API
+        val remoteData = remoteRepository.getAllBySearchProducts(search)
+
+        // Salvar no banco de dados local para cache
+        localRepository?.saveQuerySearch(Converters.responseDtoToEntity(remoteData))
+        localData = localRepository?.getSearchByQuery(search)
+
+        return Converters.responseEntityToDto(localData)
     }
 
     // User
@@ -46,23 +63,7 @@ class AppRepository @Inject constructor(
         return localRepository.deleteAllProducts()
     }
 
-    //com cache local
-    /*suspend fun getAllBySearchProductsWithCache(search: String): ResponseEntity {
 
-        // Tentar obter do cache local primeiro
-        val localData = localRepository?.getAllBySearchProducts(search)
-        if (localData != null) {
-            return localData
-        }
-
-        // Se não estiver disponível localmente, buscar da API
-        val remoteData = remoteRepository.getAllBySearchProducts(search)
-
-        // Salvar no banco de dados local para cache
-        localRepository?.saveBySearchProducts(ResponseEntity(remoteData.query))
-
-        return ResponseEntity(remoteData.query)
-    }*/
 
 
 }

@@ -41,14 +41,9 @@ class ProductListFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //productListViewModel = ViewModelProvider(this)[ProductListViewModel::class.java]
-        //val queryString = sharedViewModel.getQuery().toString().isNullOrBlank()
-        //if(!sharedViewModel.getQuery().toString().isNullOrBlank()){
-            updateUI()
-            getData()
-        //}
 
-
+        updateUI()
+        getData()
 
     }
 
@@ -103,31 +98,6 @@ class ProductListFragment  : Fragment() {
                 }
             }
 
-            /* productListViewModel.dados.observe(viewLifecycleOwner) { search ->
-            when (search) {
-                is Resource.Success -> {
-
-                    // Atualizar UI com os dados do usuário
-                    adapter = ProductListAdapter(this,sharedViewModel,search.data?.results)
-                    binding.productRecyclerView.adapter = adapter
-                    binding.progressBar.visibility = View.GONE
-                }
-                is Resource.Loading -> {
-
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-
-                is Resource.Error -> {
-
-                    binding.progressBar.visibility = View.GONE
-
-                }
-
-                else -> {
-                    //tela de erro
-                }
-            }
-        }*/
         }
     }
 

@@ -1,12 +1,28 @@
 package com.bryanollivie.appml.data.local
 
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.bryanollivie.appml.data.local.dao.ProductDao
+import com.bryanollivie.appml.data.local.entity.ResponseEntity
 import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
 import javax.inject.Inject
 
 class LocalRepository @Inject constructor(private val productDao: ProductDao) {
 
-    //Products
+    // Result Search
+
+    fun getSearchByQuery(query: String): ResponseEntity {
+        return productDao.getSearchByQuery(query)
+    }
+    fun saveQuerySearch(query: ResponseEntity){
+        return productDao.insertSearch(query)
+    }
+    fun deleteQuerySearch(){
+        return productDao.deleteAllSearch()
+    }
+
+    // Products
     fun getAllProducts(): List<ResultsItemEntity> {
         return productDao.getAll()
     }

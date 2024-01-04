@@ -13,6 +13,18 @@ import com.bryanollivie.appml.data.local.entity.User
 @Dao
 interface ProductDao {
 
+    // Search
+    @Query("SELECT * FROM result_search WHERE `query` LIKE :query")
+    fun getSearchByQuery(query: String): ResponseEntity
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSearch(query: ResponseEntity)
+
+    @Query("DELETE FROM result_search")
+    fun deleteAllSearch()
+
+
+    // Products
     @Query("SELECT * FROM 'products'")
     fun getAll(): List<ResultsItemEntity>
 
