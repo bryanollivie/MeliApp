@@ -1,27 +1,49 @@
 package com.bryanollivie.appml.domain.repository
 
-import com.bryanollivie.appml.data.local.LocalUserRepository
-import com.bryanollivie.appml.data.local.entity.User
+import com.bryanollivie.appml.data.Converters
+import com.bryanollivie.appml.data.local.LocalRepository
+import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
 import com.bryanollivie.appml.data.remote.ResponseDto
 import javax.inject.Inject
 
-class ProdRepository @Inject constructor(
-    //private val localRepository: LocalProdRepository,
-    private val localRepository: LocalUserRepository,
+class AppRepository @Inject constructor(
+    private val localRepository: LocalRepository,
     private val remoteRepository: RemoteProdRepository
 ) {
     //sem cache local
     suspend fun getSearchProd(prod:String): ResponseDto? {
-        return remoteRepository.getSearchProd(prod)
+        val resultSearch = remoteRepository.getSearchProd(prod)
+
+        //saveAllProducts(Converters.productDtoListToEntityList(resultSearch.results))
+
+        return resultSearch
     }
 
-    fun getLocalAllUsers(): List<User>? {
+    // User
+    /*fun getLocalAllUsers(): List<User>? {
         return localRepository.getAllUsers()
     }
 
     fun saveLocalUsers(users:List<User>) {
         return localRepository.saveUsers(users)
+    }*/
+
+    // Local Products
+    fun getAllProductsBySearch(query: String): List<ResultsItemEntity> {
+        return localRepository.getAllProductsBySearch(query)
+    }
+
+    fun saveAllProducts(products: List<ResultsItemEntity>){
+        return localRepository.saveAllProducts(products)
+    }
+
+    fun getAllProducts(): List<ResultsItemEntity> {
+        return localRepository.getAllProducts()
+    }
+
+    fun deleteAllProducts(){
+        return localRepository.deleteAllProducts()
     }
 
     //com cache local

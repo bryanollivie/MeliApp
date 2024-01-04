@@ -1,5 +1,6 @@
 package com.bryanollivie.appml.data.local
 
+import com.bryanollivie.appml.data.local.dao.UserDao
 import com.bryanollivie.appml.data.local.entity.User
 import javax.inject.Inject
 

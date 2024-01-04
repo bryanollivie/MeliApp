@@ -1,11 +1,11 @@
 package com.bryanollivie.appml.di
 
-import com.bryanollivie.appml.data.local.LocalProdRepository
+import com.bryanollivie.appml.data.local.LocalRepository
 import com.bryanollivie.appml.data.local.LocalUserRepository
-import com.bryanollivie.appml.data.local.ProductDao
+import com.bryanollivie.appml.data.local.dao.ProductDao
 import com.bryanollivie.appml.data.remote.ProdApiService
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
-import com.bryanollivie.appml.domain.repository.ProdRepository
+import com.bryanollivie.appml.domain.repository.AppRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +17,8 @@ object RepositoryModule {
 
     //Local
     @Provides
-    fun provideLocalProductRepository(prodDao: ProductDao): LocalProdRepository {
-        return LocalProdRepository(prodDao)
+    fun provideLocalRepository(prodDao: ProductDao): LocalRepository {
+        return LocalRepository(prodDao)
     }
 
     //Remote
@@ -29,10 +29,10 @@ object RepositoryModule {
 
     @Provides
     fun provideProductRepository(
-        localRepo: LocalUserRepository,
+        localRepo: LocalRepository,
         remoteRepo: RemoteProdRepository
-    ): ProdRepository {
-        return ProdRepository(localRepo, remoteRepo)
+    ): AppRepository {
+        return AppRepository(localRepo, remoteRepo)
         //return ProdRepository(remoteRepo)
     }
 }

@@ -1,17 +1,21 @@
 package com.bryanollivie.appml.data.local.entity
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "products")
 data class ResultsItemEntity(
-    @PrimaryKey val id: String? = null,
-    val originalPrice: Int? = null,
-    val title: String? = null,
-    val useThumbnailId: Boolean? = null,
-    val categoryId: String? = null,
-    val price: String? = null,
-    val thumbnail: String? = "",
-    val permalink: String? = null,
-    val officialStoreName: String? = null,
+    @PrimaryKey @NonNull @ColumnInfo(name = "product_id") val id: Int = 0,
+    @ColumnInfo(name = "original_price") val originalPrice: Int? = 0,
+    @ColumnInfo(name = "title") val title: String? = "",
+    //@ColumnInfo(name = "use_thumbnail_id") val useThumbnailId: Boolean? = false,
+    //@ColumnInfo(name = "categoryId") val categoryId: String? = "",
+    @ColumnInfo(name = "price") val price: String? = "",
+    @ColumnInfo(name = "thumbnail") val thumbnail: String? = "",
+    @ColumnInfo(name = "query_search") val querySearch: String? = "",
+    @ColumnInfo(name = "query_search_datetime") val dataHora: Long? = 0,
+    //@ColumnInfo(name = "product_id") val permalink: String? = "",
+    //@ColumnInfo(name = "product_id") val officialStoreName: String? = "",
 )

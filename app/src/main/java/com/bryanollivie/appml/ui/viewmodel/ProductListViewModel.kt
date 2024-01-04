@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bryanollivie.appml.data.local.entity.User
 import com.bryanollivie.appml.data.remote.ResponseDto
-import com.bryanollivie.appml.domain.repository.ProdRepository
+import com.bryanollivie.appml.domain.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class ProductListViewModel @Inject constructor(private val prodRepository: ProdRepository/*,private val savedStateHandle: SavedStateHandle*/) : ViewModel() {
+class ProductListViewModel @Inject constructor(private val prodRepository: AppRepository/*,private val savedStateHandle: SavedStateHandle*/) : ViewModel() {
 
     private val _dados = MutableStateFlow<Resource<ResponseDto>>(Resource.Loading())
     val dados: StateFlow<Resource<ResponseDto>> = _dados.asStateFlow()
@@ -62,7 +62,7 @@ class ProductListViewModel @Inject constructor(private val prodRepository: ProdR
         val user = User(userId = Random.nextInt(), firstName = "Bryanasdfadsfs", lastName = "Souza")
         val usersList = listOf(user)
 
-        prodRepository.saveLocalUsers(usersList)
+        //prodRepository.saveLocalUsers(usersList)
 
     }
 

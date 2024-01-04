@@ -1,4 +1,4 @@
-package com.bryanollivie.appml.data.local
+package com.bryanollivie.appml.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
