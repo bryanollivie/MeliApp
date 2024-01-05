@@ -1,14 +1,12 @@
 package com.bryanollivie.appml.ui.view
 
 import android.os.Bundle
-import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.bryanollivie.appml.R
 import com.bryanollivie.appml.databinding.FragmentProductDetailsBinding
 import com.bryanollivie.appml.ui.viewmodel.SharedViewModel
@@ -36,7 +34,7 @@ class ProductDetailsFragment : Fragment() {
 
         val product = sharedViewModel.getProductItemClick()
 
-        if(!product.value?.id.isNullOrEmpty()){
+        if(!product.value?.title.isNullOrEmpty()){
 
             Picasso.get().load(product.value?.thumbnail).into(binding.productDetailsImage)
 
@@ -54,6 +52,9 @@ class ProductDetailsFragment : Fragment() {
                     getString(R.string.compra_finalizada_com_sucesso), Toast.LENGTH_SHORT).show()
 
             }
+        }else{
+            Toast.makeText(context,
+                getString(R.string.error_load), Toast.LENGTH_SHORT).show()
         }
 
     }

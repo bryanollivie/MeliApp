@@ -3,9 +3,7 @@ package com.bryanollivie.appml.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bryanollivie.appml.data.Converters
 import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
-import com.bryanollivie.appml.data.local.entity.User
 import com.bryanollivie.appml.data.remote.ResponseDto
 import com.bryanollivie.appml.domain.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,10 +14,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
-class ProductListViewModel @Inject constructor(private val appRepository: AppRepository/*,private val savedStateHandle: SavedStateHandle*/) : ViewModel() {
+class ProductListViewModel @Inject constructor(private val appRepository: AppRepository) : ViewModel() {
 
     private val _dados = MutableStateFlow<Resource<ResponseDto>>(Resource.Loading())
     val dados: StateFlow<Resource<ResponseDto>> = _dados.asStateFlow()
@@ -48,12 +45,6 @@ class ProductListViewModel @Inject constructor(private val appRepository: AppRep
                 _dados.value = Resource.Error(e.toString(), null)
             }
         }
-
-    }
-
-    private fun saveLocalData(products: List<ResultsItemEntity>){
-
-        appRepository.saveAllProducts(products)
 
     }
 
