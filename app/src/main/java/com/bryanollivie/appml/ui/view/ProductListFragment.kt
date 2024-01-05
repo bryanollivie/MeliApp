@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.bryanollivie.appml.R
 import com.bryanollivie.appml.databinding.FragmentProductListBinding
 import com.bryanollivie.appml.ui.viewmodel.ProductListViewModel
@@ -20,16 +21,15 @@ import com.bryanollivie.appml.util.hideErrorLayout
 import com.bryanollivie.appml.util.showErrorLayout
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class ProductListFragment  : Fragment() {
 
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
-    //private lateinit var productListViewModel: ProductListViewModel
     private val productListViewModel : ProductListViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private var adapter = ProductListAdapter(this,null,emptyList())
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +45,12 @@ class ProductListFragment  : Fragment() {
         updateUI()
         getData()
 
+        // SwipeRefresh
+        binding.swipeRefreshLayout.setOnRefreshListener(OnRefreshListener {
+            getRemoteData()
+            updateUI()
+        })
     }
-
-
 
     private fun getData() {
         if (productListViewModel.dados.value.data == null) {
@@ -57,7 +60,12 @@ class ProductListFragment  : Fragment() {
         }else{
             updateUI()
         }
+    }
 
+    private fun getRemoteData() {
+        sharedViewModel.getQuery().observe(viewLifecycleOwner, Observer { query ->
+            productListViewModel.searchRemoteProductByQuery(query)
+        })
     }
 
     private fun updateUI() {
@@ -77,17 +85,21 @@ class ProductListFragment  : Fragment() {
                         binding.productRecyclerView.adapter = adapter
                         binding.progressBar.visibility = View.GONE
                         binding.productRecyclerView.visibility = View.VISIBLE
+                        binding.swipeRefreshLayout.isRefreshing = false
 
                     }
                     is Resource.Loading -> {
 
                         binding.progressBar.visibility = View.VISIBLE
+                        binding.swipeRefreshLayout.isRefreshing = false
+
                     }
 
                     is Resource.Error -> {
 
                         binding.productRecyclerView.visibility = View.GONE
                         binding.progressBar.visibility = View.GONE
+                        binding.swipeRefreshLayout.isRefreshing = false
                         showErrorLayout(getString(R.string.search_error)
                         ) {
                             findNavController().navigate(R.id.action_FirstFragment_to_SearchFragment)

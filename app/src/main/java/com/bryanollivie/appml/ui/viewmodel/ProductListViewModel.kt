@@ -29,9 +29,35 @@ class ProductListViewModel @Inject constructor(private val appRepository: AppRep
 
             try {
 
-                //val search = appRepository.getSearchProd(query)
                 val search = withContext(Dispatchers.IO) {
                     appRepository.getAllProductsBySearchWithCache(query)
+                }
+
+                if(search?.results?.size!! > 0) {
+                    _dados.value = Resource.Success(search!!)
+                }else{
+                    _dados.value = Resource.Error("Erro ao obter dados!", null)
+                }
+
+            } catch (e: Exception) {
+                Log.e("Error:","${e.toString()}")
+                _dados.value = Resource.Error(e.toString(), null)
+            }
+        }
+
+    }
+
+    fun searchRemoteProductByQuery(query: String) {
+
+        _dados.value = Resource.Loading(null)
+
+        viewModelScope.launch {
+
+            try {
+
+                //val search = appRepository.getSearchProd(query)
+                val search = withContext(Dispatchers.IO) {
+                    appRepository.getAllRemoteProductsBySearch(query)
                 }
 
                 if(search?.results?.size!! > 0) {

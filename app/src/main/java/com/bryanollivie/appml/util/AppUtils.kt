@@ -10,7 +10,7 @@ import android.widget.EditText
 
 object AppUtils {
 
-    /*fun isOnline(context: Context): Boolean {
+    fun isOnline(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -25,7 +25,7 @@ object AppUtils {
             @Suppress("DEPRECATION")
             return networkInfo.isConnected
         }
-    }*/
+    }
 
     fun hideKeyboardWithTouchView(context: Context,view: View) {
         view.setOnTouchListener { _, _ ->

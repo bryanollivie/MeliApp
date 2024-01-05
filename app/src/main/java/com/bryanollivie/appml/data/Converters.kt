@@ -42,13 +42,6 @@ object Converters {
         return gson.fromJson(value, type)
     }
 
-    /*@TypeConverter
-    fun toResultsItemDtoToEntityList(value: List<ResultsItemDto?>?): List<ResultsItemEntity?>? {
-        val gson = Gson()
-        val type = object : TypeToken<List<ResultsItemEntity?>>() {}.type
-        return gson.fromJson(value, type)
-    }*/
-
     @TypeConverter
     fun productDtoToEntity(dto: ResultsItemDto?): ResultsItemEntity {
         return ResultsItemEntity(
@@ -75,23 +68,4 @@ object Converters {
     fun productDtoListToEntityList(dtoList: List<ResultsItemDto?>?): List<ResultsItemEntity> {
         return dtoList!!.map { productDtoToEntity(it) }
     }
-/*
-    fun entityToDto(entity: User): UserDTO {
-        return UserDTO(
-            id = entity.id,
-            name = entity.name,
-            email = entity.email
-            // copiar outros campos...
-        )
-    }
-
-     @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return value?.let { Date(it) }
-    }
-
-    @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return date?.time
-    }*/
 }

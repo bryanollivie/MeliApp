@@ -5,10 +5,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.bryanollivie.appml.data.local.entity.ResponseEntity
 import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
-import com.bryanollivie.appml.data.local.entity.User
 
 @Dao
 interface ProductDao {
@@ -23,7 +21,6 @@ interface ProductDao {
     @Query("DELETE FROM result_search")
     fun deleteAllSearch()
 
-
     // Products
     @Query("SELECT * FROM 'products'")
     fun getAll(): List<ResultsItemEntity>
@@ -31,7 +28,6 @@ interface ProductDao {
     @Query("SELECT * FROM products WHERE product_id IN (:ids)")
     fun getAllByIds(ids: IntArray): List<ResultsItemEntity>
 
-    //@Query("SELECT * FROM products WHERE query_search LIKE :%query% ")
     @Query("SELECT * FROM products WHERE query_search LIKE :query")
     fun getAllBySearch(query: String): List<ResultsItemEntity>
 

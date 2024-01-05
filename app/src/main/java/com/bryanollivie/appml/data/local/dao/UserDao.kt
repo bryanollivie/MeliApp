@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.bryanollivie.appml.data.local.entity.User
 
+/*
 @Dao
 interface UserDao {
     @Query("SELECT * FROM 'users'")
@@ -23,4 +24,4 @@ interface UserDao {
 
     @Delete
     fun delete(user: User)
-}
+}*/

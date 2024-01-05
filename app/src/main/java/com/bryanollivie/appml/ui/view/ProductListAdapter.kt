@@ -34,15 +34,12 @@ class ProductListAdapter(private val fragment:Fragment, private val sharedViewMo
                 Picasso.get().load(R.drawable.meli_logo).into(holder.binding.productItemImage)
             }
 
-            holder.binding.productItemTitleText.text =
-                currentItem.title?.limitLengthWithEllipsis(30)?.toUpperCase()
-            holder.binding.productItemPriceBrText.text =
-                fragment.context?.getString(
+            holder.binding.productItemTitleText.text = currentItem.title?.limitLengthWithEllipsis(30)?.toUpperCase()
+            holder.binding.productItemPriceBrText.text = fragment.context?.getString(
                     R.string.price_brazil,
                     currentItem.price?.convertPesosArgentinosToBrazilianReais(EXCHANGE_RATE)
                 )
-            holder.binding.productItemPriceArText.text =
-                fragment.context?.getString(
+            holder.binding.productItemPriceArText.text = fragment.context?.getString(
                     R.string.price_argentina,currentItem?.price?.toArgentinianPesoFormat())
 
             holder.binding.productItemLayout.setOnClickListener {

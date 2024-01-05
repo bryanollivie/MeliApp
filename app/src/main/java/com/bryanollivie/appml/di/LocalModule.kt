@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.bryanollivie.appml.data.local.AppDatabase
 import com.bryanollivie.appml.data.local.dao.ProductDao
-import com.bryanollivie.appml.data.local.dao.UserDao
 import com.bryanollivie.appml.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -29,10 +28,6 @@ object LocalModule {
     @Provides
     fun provideProductDao(appDatabase: AppDatabase): ProductDao =
         appDatabase.productDao()
-
-    @Provides
-    fun provideUserDao(appDatabase: AppDatabase): UserDao =
-        appDatabase.userDao()
 
 
 }

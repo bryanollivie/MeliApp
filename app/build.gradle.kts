@@ -61,7 +61,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
-    
+
+    // SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
     //Hilt
     implementation("com.google.dagger:hilt-android:${hilt_version}")
     ksp("com.google.dagger:hilt-compiler:${hilt_version}")

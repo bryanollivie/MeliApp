@@ -12,6 +12,6 @@
     <string name="error_load">Erro de carregamento!</string>
     <string name="brazildd">Brazil: %1$s</string>
     <string name="try_again">Tentar Novamente</string>
-    <string name="search_error">Sua busca não trouxe resultados...</string>
+    <string name="search_error">Não foram encontrados resultados....</string>
 
 </resources>

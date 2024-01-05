@@ -7,6 +7,11 @@
     android:id="@+id/container"
     android:background="@color/colorBackgroud"
     tools:context=".ui.view.ProductListFragment">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productRecyclerView"
@@ -16,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <!-- ProgressBar -->
         <ProgressBar
             android:id="@+id/progressBar"
