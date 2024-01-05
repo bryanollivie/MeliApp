@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bryanollivie.appml.R
-import com.bryanollivie.appml.data.remote.ResultsItemDto
+import com.bryanollivie.appml.data.remote.dto.ResultsItemDto
 import com.bryanollivie.appml.databinding.ProductItemLayoutBinding
 import com.bryanollivie.appml.ui.viewmodel.SharedViewModel
 import com.bryanollivie.appml.util.EXCHANGE_RATE

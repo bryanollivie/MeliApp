@@ -3,8 +3,7 @@ package com.bryanollivie.appml.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
-import com.bryanollivie.appml.data.remote.ResponseDto
+import com.bryanollivie.appml.data.remote.dto.ResponseDto
 import com.bryanollivie.appml.domain.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

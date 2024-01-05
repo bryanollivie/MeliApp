@@ -1,5 +1,6 @@
 package com.bryanollivie.appml.data.remote
 
+import com.bryanollivie.appml.data.remote.dto.ResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

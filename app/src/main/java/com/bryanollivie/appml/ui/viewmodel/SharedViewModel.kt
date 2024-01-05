@@ -3,7 +3,7 @@ package com.bryanollivie.appml.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bryanollivie.appml.data.remote.ResultsItemDto
+import com.bryanollivie.appml.data.remote.dto.ResultsItemDto
 
 
 class SharedViewModel: ViewModel() {

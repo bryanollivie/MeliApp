@@ -1,5 +1,7 @@
 package com.bryanollivie.appml.data.remote
 
+import com.bryanollivie.appml.data.remote.dto.ResponseDto
+
 class RemoteProdRepository(private val prodService: ProdApiService) {
 
     suspend fun getSearchProd(prod: String): ResponseDto {

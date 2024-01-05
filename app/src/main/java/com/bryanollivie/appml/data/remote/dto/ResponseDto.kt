@@ -1,4 +1,4 @@
-package com.bryanollivie.appml.data.remote
+package com.bryanollivie.appml.data.remote.dto
 
 data class ResponseDto(
 

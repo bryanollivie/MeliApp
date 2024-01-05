@@ -1,9 +1,10 @@
 package com.bryanollivie.appml.domain.repository
 
+import android.util.Log
 import com.bryanollivie.appml.data.Converters
 import com.bryanollivie.appml.data.local.LocalRepository
 import com.bryanollivie.appml.data.remote.RemoteProdRepository
-import com.bryanollivie.appml.data.remote.ResponseDto
+import com.bryanollivie.appml.data.remote.dto.ResponseDto
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(

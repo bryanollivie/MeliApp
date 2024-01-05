@@ -3,8 +3,8 @@ package com.bryanollivie.appml.data
 import androidx.room.TypeConverter
 import com.bryanollivie.appml.data.local.entity.ResponseEntity
 import com.bryanollivie.appml.data.local.entity.ResultsItemEntity
-import com.bryanollivie.appml.data.remote.ResponseDto
-import com.bryanollivie.appml.data.remote.ResultsItemDto
+import com.bryanollivie.appml.data.remote.dto.ResponseDto
+import com.bryanollivie.appml.data.remote.dto.ResultsItemDto
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
