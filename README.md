@@ -19,4 +19,4 @@ Este projeto Android utiliza várias tecnologias e bibliotecas modernas para gar
 - Coroutines/Flow: Para programação assíncrona, melhorando a performance e a legibilidade do código.
 - JUnit/Mockito: Para testes unitários, assegurando a qualidade e robustez do código.
 
-<img width="217" alt="meliScreenshot" src="https://github.com/bryanollivie/MeliApp/assets/3091271/12ceead1-a1c7-4b67-8b34-50bcd8dbc53a">
+<img width="215" alt="Screenshot 2024-01-06 at 15 18 05" src="https://github.com/bryanollivie/MeliApp/assets/3091271/55aaa792-6d57-4a8f-a63a-c26f77a91f87">
