@@ -45,10 +45,13 @@ android {
 
 dependencies {
 
-
+    val androidXCoreVersion = "1.9.0"
+    val androidXTestCoreVersion = "1.5.0"
     val jUnitVersion = "4.13.2"
     val androidXTestVersion = "1.5.0"
     val androidXTestExtVersion = "1.1.5"
+    val androidXTestExtKotlinRunnerVersion = "1.1.5"
+    val robolectricVersion = "4.11.1"
     val mockitoVersion = "3.11.2"
     val mockitoKotlinVersion = "5.2.1"
     val mockkVersion = "1.13.8"
@@ -58,7 +61,7 @@ dependencies {
     val roomVersion = "2.6.1"
     val retrofitVersion = "2.9.0"
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:$androidXCoreVersion")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
@@ -75,6 +78,9 @@ dependencies {
     testImplementation("org.mockito:mockito-core:$mockitoVersion")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
     testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion")
+    testImplementation("androidx.test:core-ktx:$androidXTestCoreVersion")
+    testImplementation("org.robolectric:robolectric:$robolectricVersion")
     androidTestImplementation("androidx.test.ext:junit:$androidXTestExtVersion")
 
     // SwipeRefreshLayout
@@ -89,6 +95,10 @@ dependencies {
     //Hilt
     implementation("com.google.dagger:hilt-android:${hiltVersion}")
     ksp("com.google.dagger:hilt-compiler:${hiltVersion}")
+    testImplementation("com.google.dagger:hilt-android-testing:${hiltVersion}")
+    ksp("com.google.dagger:hilt-android-compiler:${hiltVersion}")
+    androidTestImplementation ("com.google.dagger:hilt-android-testing:${hiltVersion}")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:${hiltVersion}")
 
     //Network
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
