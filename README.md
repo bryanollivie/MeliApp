@@ -19,4 +19,21 @@ Este projeto Android utiliza várias tecnologias e bibliotecas modernas para gar
 - Coroutines/Flow: Para programação assíncrona, melhorando a performance e a legibilidade do código.
 - JUnit/Mockito: Para testes unitários, assegurando a qualidade e robustez do código.
 
-<img width="215" alt="Screenshot 2024-01-06 at 15 18 05" src="https://github.com/bryanollivie/MeliApp/assets/3091271/55aaa792-6d57-4a8f-a63a-c26f77a91f87">
+
+![meli3](https://github.com/bryanollivie/MeliApp/assets/3091271/b3e11789-511e-4400-bdd4-e660913512ef)
+
+Arquitetura Macro do Projeto
+------------
+
+
+![Diagrama sem nome drawio (1)](https://github.com/bryanollivie/MeliApp/assets/3091271/575f6f6a-a6dd-40bc-b0d3-d4803cabfb2a)
+
+Características Principais
+- MVVM: Arquitetura que separa a lógica de negócios da interface do usuário, facilitando a manutenção e os testes.
+- ==> Model: Representa os dados e a lógica de negócios. Pode incluir o banco de dados, rede ou qualquer outra fonte de dados.
+- ==> View: É a camada de interface do usuário, geralmente activity ou fragments,que exibe os dados e envia interações.
+- ==>ViewModel: Atua como um intermediário entre o Model e a View, contendo a lógica de apresentação. Ele observa mudanças no Model e atualiza a View.
+- Android Application: Utilizamos uma classe Application personalizada para inicializar componentes globais.
+- Repositórios Locais e Remotos:
+- Repositório Local: Gerencia os dados armazenados localmente, por exemplo, usando o Room para persistência de dados.
+- Repositório Remoto: Lida com a comunicação de rede, como chamadas API, utilizando Retrofit.
