@@ -35,6 +35,5 @@ Características Principais
 - ==> View: É a camada de interface do usuário, geralmente activity ou fragments,que exibe os dados e envia interações.
 - ==>ViewModel: Atua como um intermediário entre o Model e a View, contendo a lógica de apresentação. Ele observa mudanças no Model e atualiza a View.
 - Android Application: Utilizamos uma classe Application personalizada para inicializar componentes globais.
-- Repositórios Locais e Remotos:
 - Repositório Local: Gerencia os dados armazenados localmente, por exemplo, usando o Room para persistência de dados.
 - Repositório Remoto: Lida com a comunicação de rede, como chamadas API, utilizando Retrofit.
