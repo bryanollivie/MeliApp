@@ -13,6 +13,7 @@ Este projeto Android utiliza várias tecnologias e bibliotecas modernas para gar
 - Kotlin: Linguagem de programação principal.
 - MVVM: Padrão de arquitetura para uma organização de código clara e separação de responsabilidades.
 - Hilt: Para injeção de dependência, facilitando a manutenção e testabilidade.
+- Jetpack Navigation: Simplifica a implementação da navegação em aplicativos Android.
 - LeakCanary: Para detecção de vazamentos de memória.
 - Retrofit: Para chamadas de rede, oferecendo uma maneira eficiente de se conectar com APIs REST.
 - Room: Para persistência de dados, permitindo um fácil acesso a bancos de dados locais e cache.
