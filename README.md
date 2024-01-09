@@ -26,7 +26,7 @@ Arquitetura Macro do Projeto
 ------------
 
 
-![Diagrama sem nome drawio (1)](https://github.com/bryanollivie/MeliApp/assets/3091271/575f6f6a-a6dd-40bc-b0d3-d4803cabfb2a)
+![Screen Recording 2024-01-09 at 02 47 27](https://github.com/bryanollivie/MeliApp/assets/3091271/c262eccd-6dba-4f3d-a8ad-e273da188ac1)
 
 Características Principais
 - MVVM: Arquitetura que separa a lógica de negócios da interface do usuário, facilitando a manutenção e os testes.
