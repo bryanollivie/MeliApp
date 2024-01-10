@@ -23,11 +23,11 @@ Este projeto Android utiliza várias tecnologias e bibliotecas modernas para gar
 
 ![meli3](https://github.com/bryanollivie/MeliApp/assets/3091271/b3e11789-511e-4400-bdd4-e660913512ef)
 
-Arquitetura Macro do Projeto
+Arquitetura Macro
 ------------
 
+![Screen Recording 2024-01-10 at 18 55 20](https://github.com/bryanollivie/MeliApp/assets/3091271/a3aa4a8f-40ed-42d2-bf78-c1a1d1d75260)
 
-![Screen Recording 2024-01-09 at 02 47 27](https://github.com/bryanollivie/MeliApp/assets/3091271/c262eccd-6dba-4f3d-a8ad-e273da188ac1)
 
 Características Principais
 - MVVM: Arquitetura que separa a lógica de negócios da interface do usuário, facilitando a manutenção e os testes.
